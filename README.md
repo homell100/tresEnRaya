@@ -1,4 +1,4 @@
-1. Crear una graella
+OK Crear una graella
 2. Dos jugadors, decidir qui comence
 3. Mostrar de qui es el torn 
 4. Poder donar click a una de les caselles i que es dibuixi la figura corresponent
