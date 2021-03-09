@@ -10,8 +10,8 @@ body{
 }
 
 main{
-    width: 50%;
-    height: 80%;
+    width:30%;
+    height: 50%;
     display: grid;
     grid-template-rows: auto auto auto;
     grid-template-columns: auto auto auto;
