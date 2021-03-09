@@ -30,6 +30,9 @@ main{
     
 }
 
+.player-container {
+    width: 130px;
+}
 
 footer{
     position: absolute;
