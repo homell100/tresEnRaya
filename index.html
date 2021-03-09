@@ -7,20 +7,34 @@
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
     <link rel="stylesheet" href="main.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" defer></script>
-    <script src="app.js" defer></script> 
+    <script src="./scripts/app.js" defer></script> 
     <title>Document</title>
 </head>
 <body>
     <main>
-        <div class="cell" id="1"></div>
-        <div class="cell" id="2"></div>
-        <div class="cell" id="3"></div>
-        <div class="cell" id="4"></div>
-        <div class="cell" id="5"></div>
-        <div class="cell" id="6"></div>
-        <div class="cell" id="7"></div>
-        <div class="cell" id="8"></div>
-        <div class="cell" id="9"></div>
+        <div id="player1-container" class='player-container'>
+            <i class="fas fa-times fa-10x"></i>
+            <div>Player1</div>
+            <div class="turn-indicator">It's your turn, mate!</div>
+
+        </div>
+        <div id="main-grid">
+            <div class="cell" id="1" data-row="1" data-col="1"></div>
+            <div class="cell" id="2" data-row="1" data-col="2"></div>
+            <div class="cell" id="3" data-row="1" data-col="3"></div>
+            <div class="cell" id="4" data-row="2" data-col="1"></div>
+            <div class="cell" id="5" data-row="2" data-col="2"></div>
+            <div class="cell" id="6" data-row="2" data-col="3"></div>
+            <div class="cell" id="7" data-row="3" data-col="1"></div>
+            <div class="cell" id="8" data-row="3" data-col="2"></div>
+            <div class="cell" id="9" data-row="3" data-col="3"></div>
+        </div>
+        <div id="player2-container" class='player-container'>
+            <i class="far fa-circle fa-8x"></i>
+            <div>Player2 </div>
+            <div class="turn-indicator" hidden>It's your turn, mate!</div>
+        </div>
+        
     </main>
     <footer> Designed by Sergi and Marta</footer>
 </body>
