@@ -10,11 +10,26 @@ $(document).ready(function(){
         $(`#${event.target.id}`).append(currentPlayer.symbol);
         $(`#${event.target.id}`).addClass(currentPlayer.className);
         currentPlayer = currentPlayer === cross ? circle : cross;
-
+        
         $('.turn-indicator').toggle();
         checkEndGame();
+        //Status winner takes circle cross or empty
         if(STATUS.winner){
-            alert(STATUS.winner)
+            console.log(STATUS.winner)
+            // S'ha de "parar el joc"
+            $('.cell').unbind('click')
+            //S'han de treure marcadors dels torns
+            $('.turn-indicator').hide();
+
+            //S'ha de dir qui ha guanyat
+            if(STATUS.winner == "cross"){
+                $("#player-cross-container").append("<p> You won </p>")
+                $("#player-cross-container .score").text(1)
+            }else{
+                $("#player-circle-container").append("<p> You won </p>")
+            }
+
+            //Sumar-li un punt
         }
         
     });
@@ -40,7 +55,6 @@ function checkEndGame () {
        if(count == -3){
            STATUS.winner ="circle"
        }
-       console.log("fila", row, "vale", count)
     }
     //Cols
     for(col of [1,2,3]){
