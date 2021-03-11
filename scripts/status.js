@@ -4,7 +4,8 @@ const STATUS = {
         cross: 0,
         circle: 0
     },
-    setScores: function(score,player){
-        
+    addPoint: function(player){
+        this.score[player] ++;
     }
+
 }

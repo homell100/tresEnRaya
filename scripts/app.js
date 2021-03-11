@@ -22,17 +22,24 @@ $(document).ready(function(){
             $('.turn-indicator').hide();
 
             //S'ha de dir qui ha guanyat
-            if(STATUS.winner == "cross"){
-                $("#player-cross-container").append("<p> You won </p>")
-                $("#player-cross-container .score").text(1)
-            }else{
-                $("#player-circle-container").append("<p> You won </p>")
-            }
-
+            $(`#player-${STATUS.winner}-container`).append("<p> You won </p>");
+            console.log('before adding point');
+            STATUS.addPoint(STATUS.winner);
+            console.log('afteradding point', STATUS.score);
             //Sumar-li un punt
+            DOM.updateScore(STATUS.winner, STATUS.score[STATUS.winner]);
+
+            $('#reset-button').show();
         }
         
     });
+
+    $('#reset-button').click(function(event){
+        // borrar grid
+        // afegir evnets a les cel·les
+        $('#reset-button').hide();
+    })
+
 })
 
 function checkEndGame () {
