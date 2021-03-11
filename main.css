@@ -1,5 +1,9 @@
 body{
     height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-self: center;
 }
 main{
     width: 100%;
@@ -37,4 +41,9 @@ main{
 footer{
     position: absolute;
     bottom: 0;
+}
+
+#reset-button{
+    width: 20%;
+    margin: 10px auto;
 }
