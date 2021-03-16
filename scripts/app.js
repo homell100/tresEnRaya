@@ -5,6 +5,22 @@ let currentPlayer = cross;
 
 $(document).ready(function(){
 
+    startGame()
+
+    $('#reset-button').click(function(event){
+        // borrar grid
+        DOM.reset()
+        //Remove winner
+        STATUS.clearWinner()
+        // Start playing
+        startGame()
+        $('#reset-button').hide();
+    })
+
+})
+
+function startGame(){
+    console.log("winner", STATUS.winner)
     $('.cell').click(function(event){
         $(`#${event.target.id}`).unbind('click');
         // $(`#${event.target.id}`).append(currentPlayer.symbol);
@@ -15,24 +31,22 @@ $(document).ready(function(){
         
         $('.turn-indicator').toggle();
         checkEndGame();
+        console.log("winner", STATUS.winner)
         //Status winner takes circle cross or empty
         if(STATUS.winner){
-         
-            console.log(STATUS.winner)
+            console.log("winner",STATUS.winner)
             // S'ha de "parar el joc"
-            $('.cell').unbind('click')
+            DOM.removeClicks()
             //S'han de treure marcadors dels torns
-            $('.turn-indicator').hide();
-
+            DOM.removeTurnMessage()
             //S'ha de dir qui ha guanyat
-            $(`#player-${STATUS.winner}-container`).append("<p> You won </p>");
-            console.log('before adding point');
-            STATUS.addPoint(STATUS.winner);
-            console.log('afteradding point', STATUS.score);
+            DOM.writeWinnerMessage(STATUS.winner)
             //Sumar-li un punt
+            STATUS.addPoint(STATUS.winner);
+            //Update DOM
             DOM.updateScore(STATUS.winner, STATUS.score[STATUS.winner]);
 
-            $('#reset-button').show();
+            DOM.showReset()
         }
         
     });
@@ -45,7 +59,7 @@ $(document).ready(function(){
         $('#reset-button').hide();
     })
 
-})
+}
 
 function checkEndGame () {
     //Rows
@@ -86,7 +100,6 @@ function checkEndGame () {
        if(count == -3){
            STATUS.winner ="circle"
        }
-       console.log(count)
     }
 
     //Principal diagonal
