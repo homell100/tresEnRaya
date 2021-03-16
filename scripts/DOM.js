@@ -24,13 +24,22 @@ const DOM = {
     hideReset: function(){
         $('#reset-button').hide();
     },
-    updateCells(cells){
+
+    clearGrid: function() {
+        console.log('ad');
+    },
+
+    updateCells(cells, symbols){
         //cells is an array of arrays with "", O or X
         //We need give children to the cells, depending on the values of cells[x,y]
         for(var i=0; i<3; i++ ){
             for(var j= 0; j<3; j++){
-                //$(this).attr("data-id")
-                // $('.cell["data-row"=0  =  cells[i][j]
+                if (cells[i][j] === 'X'){
+                    $(`[data-row=${i}][data-col=${j}]`).append(symbols.cross);
+                }
+                if (cells[i][j] === 'O'){
+                    $(`[data-row=${i}][data-col=${j}]`).append(symbols.circle);
+                }
             }
         }
     }

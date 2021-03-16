@@ -1,8 +1,7 @@
-
+var { cross, circle } = CONFIG;
 
 //Randomize who starts first
-STATUS.chooseRndPlayer()
-
+STATUS.changePlayer(UTILS.makeRandBoolean()? cross: circle);
 
 $(document).ready(function(){
 
@@ -22,6 +21,7 @@ $(document).ready(function(){
 
 function startGame(){
     $('.cell').click(function(event){
+        console.log(STATUS.cells);
         // $(`#${event.target.id}`).unbind('click');
         // $(`#${event.target.id}`).append(currentPlayer.symbol);
         // $(`#${event.target.id}`).addClass(currentPlayer.className);
@@ -32,12 +32,11 @@ function startGame(){
         var col = $(event.target).attr("data-col")
         STATUS.updateCells(row, col, STATUS.currentPlayer)
         // "Llegir" la taula que esta a status.cells i dibuixar les caselles
-        DOM.updateCells(STATUS.cells)
-        STATUS.changePlayer()
+        DOM.updateCells(STATUS.cells, {cross: cross.symbol, circle: circle.symbol})
+        STATUS.changePlayer((STATUS.currentPlayer===circle)? cross: circle)
         
         $('.turn-indicator').toggle();
-        checkEndGame();
-        console.log("winner", STATUS.winner)
+        // checkEndGame();
         //Status winner takes circle cross or empty
         if(STATUS.winner){
             console.log("winner",STATUS.winner)
