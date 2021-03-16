@@ -4,8 +4,15 @@ const STATUS = {
         cross: 0,
         circle: 0
     },
+    cells: [
+        ['','',''],
+        ['','',''],
+        ['','','']
+    ],
+
     addPoint: function(player){
         this.score[player] ++;
-    }
+    },
 
+    
 }

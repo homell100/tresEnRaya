@@ -7,14 +7,17 @@ $(document).ready(function(){
 
     $('.cell').click(function(event){
         $(`#${event.target.id}`).unbind('click');
-        $(`#${event.target.id}`).append(currentPlayer.symbol);
-        $(`#${event.target.id}`).addClass(currentPlayer.className);
+        // $(`#${event.target.id}`).append(currentPlayer.symbol);
+        // $(`#${event.target.id}`).addClass(currentPlayer.className);
+        // Modificar el STATUS.cells segons que s'ha clicat
+        // "Llegir" la taula que esta a status.cells i dibuixar les caselles
         currentPlayer = currentPlayer === cross ? circle : cross;
         
         $('.turn-indicator').toggle();
         checkEndGame();
         //Status winner takes circle cross or empty
         if(STATUS.winner){
+         
             console.log(STATUS.winner)
             // S'ha de "parar el joc"
             $('.cell').unbind('click')
@@ -36,6 +39,8 @@ $(document).ready(function(){
 
     $('#reset-button').click(function(event){
         // borrar grid
+        STATUS.clearGrid()
+        DOM.updateGrid()
         // afegir evnets a les cel·les
         $('#reset-button').hide();
     })
