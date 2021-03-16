@@ -1,7 +1,8 @@
 
-const cross = {symbol: '<i class="fas fa-times fa-10x"></i>', className: 'cross'};
-const circle = {symbol:'<i class="far fa-circle fa-8x"></i>', className: 'circle'};
-let currentPlayer = cross;
+
+//Randomize who starts first
+STATUS.chooseRndPlayer()
+
 
 $(document).ready(function(){
 
@@ -20,14 +21,19 @@ $(document).ready(function(){
 })
 
 function startGame(){
-    console.log("winner", STATUS.winner)
     $('.cell').click(function(event){
-        $(`#${event.target.id}`).unbind('click');
+        // $(`#${event.target.id}`).unbind('click');
         // $(`#${event.target.id}`).append(currentPlayer.symbol);
         // $(`#${event.target.id}`).addClass(currentPlayer.className);
+        //Unbind the clicked cell
+
         // Modificar el STATUS.cells segons que s'ha clicat
+        var row = $(event.target).attr("data-row")
+        var col = $(event.target).attr("data-col")
+        STATUS.updateCells(row, col, STATUS.currentPlayer)
         // "Llegir" la taula que esta a status.cells i dibuixar les caselles
-        currentPlayer = currentPlayer === cross ? circle : cross;
+        DOM.updateCells(STATUS.cells)
+        STATUS.changePlayer()
         
         $('.turn-indicator').toggle();
         checkEndGame();

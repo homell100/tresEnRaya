@@ -2,11 +2,6 @@ const DOM = {
     updateScore: function (player, score) {
         $(`#player-${player}-container .score`).text(score);
     },
-<<<<<<< HEAD
-    clearGrid: function() {
-        console.log("clearGird")
-    }
-=======
     removeClicks: function(){
         $('.cell').unbind('click')
     },
@@ -20,15 +15,24 @@ const DOM = {
         this.clearGrid()
         this.removeWinnerMessage()
     },
-    clearGrid: function (){
-        $(".cell").empty()
-    },
     removeWinnerMessage: function(){
         $(".player-container .message-wrapper").empty()
     },
     showReset: function(){
         $('#reset-button').show();
+    },
+    hideReset: function(){
+        $('#reset-button').hide();
+    },
+    updateCells(cells){
+        //cells is an array of arrays with "", O or X
+        //We need give children to the cells, depending on the values of cells[x,y]
+        for(var i=0; i<3; i++ ){
+            for(var j= 0; j<3; j++){
+                //$(this).attr("data-id")
+                // $('.cell["data-row"=0  =  cells[i][j]
+            }
+        }
     }
 
->>>>>>> e717cb38652161e83659745a69c23344a035e523
 }
