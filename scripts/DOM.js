@@ -26,22 +26,27 @@ const DOM = {
     },
 
     clearGrid: function() {
-        console.log('ad');
+        $(".cell").empty();
     },
 
-    updateCells(cells, symbols){
+    updateGrid(cells, cross, circle){
+        console.log(cross, circle)
         //cells is an array of arrays with "", O or X
         //We need give children to the cells, depending on the values of cells[x,y]
+        this.clearGrid()
         for(var i=0; i<3; i++ ){
             for(var j= 0; j<3; j++){
-                if (cells[i][j] === 'X'){
-                    $(`[data-row=${i}][data-col=${j}]`).append(symbols.cross);
+                if (cells[i][j] === cross.picture){
+                    $(`[data-row=${i}][data-col=${j}]`).append(cross.symbol);
                 }
-                if (cells[i][j] === 'O'){
-                    $(`[data-row=${i}][data-col=${j}]`).append(symbols.circle);
+                if (cells[i][j] === circle.picture){
+                    $(`[data-row=${i}][data-col=${j}]`).append(circle.symbol);
                 }
             }
         }
+    },
+    toggleTurnIndicator: function(){
+        $('.turn-indicator').toggle();
     }
 
 }

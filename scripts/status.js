@@ -22,6 +22,13 @@ const STATUS = {
     addPoint: function(player){
         this.score[player] ++;
     },
+    clearGrid: function(){
+        this.cells = [
+            ['','',''],
+            ['','',''],
+            ['','','']
+        ]
+    }
 
     
 }

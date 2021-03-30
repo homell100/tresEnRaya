@@ -32,11 +32,10 @@ function startGame(){
         var col = $(event.target).attr("data-col")
         STATUS.updateCells(row, col, STATUS.currentPlayer)
         // "Llegir" la taula que esta a status.cells i dibuixar les caselles
-        DOM.updateCells(STATUS.cells, {cross: cross.symbol, circle: circle.symbol})
+        DOM.updateGrid(STATUS.cells, cross, circle)
         STATUS.changePlayer((STATUS.currentPlayer===circle)? cross: circle)
-        
-        $('.turn-indicator').toggle();
-        // checkEndGame();
+        DOM.toggleTurnIndicator()
+        STATUS.winner = checkEndGame();
         //Status winner takes circle cross or empty
         if(STATUS.winner){
             console.log("winner",STATUS.winner)
@@ -59,9 +58,9 @@ function startGame(){
     $('#reset-button').click(function(event){
         // borrar grid
         STATUS.clearGrid()
-        DOM.updateGrid()
+        DOM.updateGrid(STATUS.cells, cross, circle)
         // afegir evnets a les cel·les
-        $('#reset-button').hide();
+        DOM.hideReset()
     })
 
 }
@@ -69,80 +68,55 @@ function startGame(){
 function checkEndGame () {
     //Rows
     //Horitzontal
-    for(row of [1,2,3]){
+    for(row of [0,1,2]){
         var count = 0;
-        for(col of [1,2,3]){
-            if($(`div.cell[data-row="${row}"][data-col="${col}"]`).hasClass("cross")){
-                count ++;
-            }
-            if($(`div.cell[data-row="${row}"][data-col="${col}"]`).hasClass("circle")){
-                count --;
-            }
+        for(col of [0,1,2]){
+            // if($(`div.cell[data-row="${row}"][data-col="${col}"]`).hasClass("cross")){
+            //     count ++;
+            // }
+            if(STATUS.cells[row][col] == CONFIG.cross.picture) count ++
+            if(STATUS.cells[row][col] == CONFIG.circle.picture) count --
        }
-       if(count == 3){
-           STATUS.winner = "cross"
+       if(count == 3)
+           return CONFIG.cross.className
 
-       }
        if(count == -3){
-           STATUS.winner ="circle"
+           return CONFIG.circle.className
        }
     }
     //Cols
-    for(col of [1,2,3]){
+    for(col of [0,1,2]){
         var count = 0;
-        for(row of [1,2,3]){
-            if($(`div.cell[data-row="${row}"][data-col="${col}"]`).hasClass("cross")){
-                count ++;
-            }
-            if($(`div.cell[data-row="${row}"][data-col="${col}"]`).hasClass("circle")){
-                count --;
-            }
+        for(row of [0,1,2]){
+            if(STATUS.cells[row][col] == CONFIG.cross.picture) count ++
+            if(STATUS.cells[row][col] == CONFIG.circle.picture) count --
        }
        if(count == 3){
-           STATUS.winner = "cross"
+            return CONFIG.cross.className
 
        }
        if(count == -3){
-           STATUS.winner ="circle"
+        return CONFIG.circle.className
        }
     }
 
     //Principal diagonal
     var count = 0;
-    for(i of [1,2,3]){
-        
-        if($(`div.cell[data-row="${i}"][data-col="${i}"]`).hasClass("cross")){
-            count ++;
-        }
-        if($(`div.cell[data-row="${i}"][data-col="${i}"]`).hasClass("circle")){
-            count --;
-        }
+    for(i of [0,1,2]){
+        if(STATUS.cells[i][i] == CONFIG.cross.picture) count ++
+        if(STATUS.cells[i][i] == CONFIG.circle.picture) count --
+       
     }
-    if(count == 3){
-        STATUS.winner = "cross"
-
-    }
-    if(count == -3){
-        STATUS.winner ="circle"
-    }
+    if(count == 3)  return CONFIG.cross.className
+    if(count == -3) return CONFIG.circle.className
     count = 0;
     //Secondary diagonal
-    for(i of [1,2,3]){
-        
-        if($(`div.cell[data-row="${i}"][data-col="${4-i}"]`).hasClass("cross")){
-            count ++;
-        }
-        if($(`div.cell[data-row="${i}"][data-col="${4-i}"]`).hasClass("circle")){
-            count --;
-        }
+    for(i of [0,1,2]){
+        if(STATUS.cells[i][2-i] == CONFIG.cross.picture) count ++
+        if(STATUS.cells[i][2-i] == CONFIG.circle.picture) count --
     }
-    if(count == 3){
-        STATUS.winner = "cross"
-
-    }
-    if(count == -3){
-        STATUS.winner ="circle"
-    }
+    if(count == 3)  return CONFIG.cross.className
+    if(count == -3) return CONFIG.circle.className
 }
 
 
