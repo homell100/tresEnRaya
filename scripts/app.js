@@ -1,28 +1,24 @@
 var { cross, circle } = CONFIG;
 
-//Randomize who starts first
-STATUS.changePlayer(UTILS.makeRandBoolean()? cross: circle);
 
 $(document).ready(function(){
 
     startGame()
 
-    $('#reset-button').click(function(event){
-        // borrar grid
-        DOM.reset()
-        //Remove winner
-        STATUS.clearWinner()
-        // Start playing
-        startGame()
-        $('#reset-button').hide();
-    })
+    // $('#reset-button').click(function(event){
+
+    // })
 
 })
 
 function startGame(){
+    //Randomize who starts first
+    STATUS.changePlayer(UTILS.makeRandBoolean()? cross: circle);
+
+    console.log('abans de posar el event click');
     $('.cell').click(function(event){
-        console.log(STATUS.cells);
-        // $(`#${event.target.id}`).unbind('click');
+        console.log(STATUS.currentPlayer.className)
+        
         // $(`#${event.target.id}`).append(currentPlayer.symbol);
         // $(`#${event.target.id}`).addClass(currentPlayer.className);
         //Unbind the clicked cell
@@ -30,24 +26,21 @@ function startGame(){
         // Modificar el STATUS.cells segons que s'ha clicat
         var row = $(event.target).attr("data-row")
         var col = $(event.target).attr("data-col")
+        DOM.unbindCell(row, col);
         STATUS.updateCells(row, col, STATUS.currentPlayer)
         // "Llegir" la taula que esta a status.cells i dibuixar les caselles
         DOM.updateGrid(STATUS.cells, cross, circle)
         STATUS.changePlayer((STATUS.currentPlayer===circle)? cross: circle)
-        DOM.toggleTurnIndicator()
+        DOM.writeTurnIndicator(STATUS.currentPlayer.className);
         STATUS.winner = checkEndGame();
+
         //Status winner takes circle cross or empty
         if(STATUS.winner){
-            console.log("winner",STATUS.winner)
             // S'ha de "parar el joc"
-            DOM.removeClicks()
-            //S'han de treure marcadors dels torns
-            DOM.removeTurnMessage()
-            //S'ha de dir qui ha guanyat
-            DOM.writeWinnerMessage(STATUS.winner)
-            //Sumar-li un punt
+            console.log("winner",STATUS.winner)
+
+            DOM.showWinner(STATUS.winner);           
             STATUS.addPoint(STATUS.winner);
-            //Update DOM
             DOM.updateScore(STATUS.winner, STATUS.score[STATUS.winner]);
 
             DOM.showReset()
@@ -56,11 +49,16 @@ function startGame(){
     });
 
     $('#reset-button').click(function(event){
-        // borrar grid
+        console.log('reset')
+        // borrar grid and remove winner
         STATUS.clearGrid()
-        DOM.updateGrid(STATUS.cells, cross, circle)
-        // afegir evnets a les cel·les
-        DOM.hideReset()
+        STATUS.clearWinner()
+
+        // borrar grid
+        DOM.reset()
+
+        // Start playing
+        startGame()
     })
 
 }

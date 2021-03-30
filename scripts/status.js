@@ -15,7 +15,7 @@ const STATUS = {
         this.currentPlayer = player
     },
     updateCells: function(x, y, player){
-        console.log('x',x,'y',y,player);
+        console.log('x:',x,' y:',y,player.className);
         this.cells[x][y] = player.picture
     },
 
@@ -28,6 +28,10 @@ const STATUS = {
             ['','',''],
             ['','','']
         ]
+    },
+
+    clearWinner: function() {
+        winner='';
     }
 
     
